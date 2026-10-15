@@ -468,26 +468,41 @@
         }
 
         // --- 2. INITIALIZATION & REALTIME SYNC ---
+        // Firebase is the source of truth when data exists. Never auto-upload
+        // local data just because a read returns null; that can overwrite live data.
+        let firebaseListenerAttached = false;
         window.onload = function() {
             const savedLang = localStorage.getItem('zinc_lang') || 'gu';
-            document.getElementById('langSelect').value = savedLang;
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect) langSelect.value = savedLang;
             changeLanguage(savedLang);
 
             ensureMatchShape();
             renderAllMatchesUI();
 
-            if (matchesRef) {
-                matchesRef.on('value', (snapshot) => {
-                    const data = snapshot.val();
-                    if (data) {
-                        matchesData = data;
-                        localStorage.setItem('zinc_multimatches', JSON.stringify(data));
-                        renderAllMatchesUI();
-                    } else {
-                        matchesRef.set(matchesData);
-                    }
-                });
+            if (!matchesRef) {
+                console.error('[Firebase] Database reference is not initialized.');
+                return;
             }
+            if (firebaseListenerAttached) return;
+            firebaseListenerAttached = true;
+
+            matchesRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data && typeof data === 'object' && !Array.isArray(data)) {
+                    matchesData = data;
+                    ensureMatchShape();
+                    localStorage.setItem('zinc_multimatches', JSON.stringify(matchesData));
+                    renderAllMatchesUI();
+                    console.info('[Firebase] Live matches received.');
+                } else {
+                    console.warn('[Firebase] zinc_matches is empty/null. Existing local data was NOT uploaded automatically. Add/update matches from an authenticated admin workflow.');
+                }
+            }, (error) => {
+                console.error('[Firebase] Read/listener failed:', error.code || '', error.message || error);
+                const root = document.getElementById('dynamicMatches');
+                if (root) root.insertAdjacentHTML('afterbegin', '<p class="text-red-400 text-sm p-3">Live match sync failed. Firebase read permission/rules તપાસો અને Console માં error જુઓ.</p>');
+            });
         };
 
         function toggleSlotsBox(boxId) {
@@ -634,12 +649,17 @@
         function saveAndSyncData() {
             localStorage.setItem('zinc_multimatches', JSON.stringify(matchesData));
             renderAllMatchesUI();
-            if(matchesRef) {
-                matchesRef.set(matchesData).then(() => console.log('Firebase sync successful')).catch(err => {
-                    console.error('Firebase sync failed:', err);
-                    alert('Firebase માં save થયું નથી. Firebase Rules/Auth permissions તપાસો. Error: ' + err.message);
-                });
+            if (!matchesRef) {
+                console.error('[Firebase] Cannot save: database reference unavailable.');
+                alert('Firebase જોડાયેલું નથી. Internet અને Firebase config તપાસો.');
+                return;
             }
+            matchesRef.set(matchesData)
+                .then(() => console.info('[Firebase] Sync successful.'))
+                .catch(err => {
+                    console.error('[Firebase] Write failed:', err.code || '', err.message || err);
+                    alert('Firebase માં save થયું નથી. Rules/Auth permissions તપાસો. Error: ' + (err.code || err.message));
+                });
         }
 
         // --- 3. SECURITY & ADMIN CONTROL ---
@@ -659,7 +679,7 @@
                 closeAdminAuthModal();
                 switchTab('admin');
             } else {
-                alert("Wrong PIN! (સાચો પાસવર્ડ anil779 છે)");
+                alert("Wrong PIN! સાચો Admin PIN દાખલ કરો.");
             }
         }
 
