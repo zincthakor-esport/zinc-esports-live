@@ -54,12 +54,7 @@
             </h1>
 
             <div class="flex items-center gap-2">
-                <!-- Wallet Quick Badge -->
-                <button onclick="switchTab('wallet')" class="px-3 py-1.5 bg-purple-500/20 text-purple-400 border border-purple-500/40 rounded-xl text-xs font-bold hover:bg-purple-500 hover:text-white transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-wallet"></i> <span>₹<span id="hdrBalance">0.00</span></span>
-                </button>
-
-                <!-- Language Selector -->
+<!-- Language Selector -->
                 <select id="langSelect" onchange="changeLanguage(this.value)" class="bg-zincdark border border-zincborder text-yellow-400 font-bold text-xs rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-yellow-500 cursor-pointer">
                     <option value="gu" selected>🌐 ગુજરાતી</option>
                     <option value="en">🌐 English</option>
@@ -88,323 +83,83 @@
             <button onclick="switchTab('cs')" id="nav-cs" class="nav-btn px-4 py-2 bg-zincdark text-gray-300 border border-zincborder font-bold rounded-xl text-xs whitespace-nowrap">
                 <i class="fa-solid fa-crosshairs text-red-400 me-1"></i> <span data-i18n="nav_cs">CS Mode (1v1 / 4v4)</span>
             </button>
-            <button onclick="switchTab('wallet')" id="nav-wallet" class="nav-btn px-4 py-2 bg-zincdark text-gray-300 border border-zincborder font-bold rounded-xl text-xs whitespace-nowrap">
-                <i class="fa-solid fa-wallet text-purple-400 me-1"></i> <span data-i18n="nav_wallet">Wallet</span>
-            </button>
-            <button onclick="switchTab('passes')" id="nav-passes" class="nav-btn px-4 py-2 bg-zincdark text-gray-300 border border-zincborder font-bold rounded-xl text-xs whitespace-nowrap">
-                <i class="fa-solid fa-ticket text-yellow-400 me-1"></i> <span data-i18n="nav_passes">Tournament Pass</span>
-            </button>
-            <button onclick="switchTab('leaderboard')" id="nav-leaderboard" class="nav-btn px-4 py-2 bg-zincdark text-gray-300 border border-zincborder font-bold rounded-xl text-xs whitespace-nowrap">
-                <i class="fa-solid fa-trophy text-amber-400 me-1"></i> <span data-i18n="nav_leaderboard">Leaderboard</span>
-            </button>
-            <button onclick="switchTab('withdraw')" id="nav-withdraw" class="nav-btn px-4 py-2 bg-zincdark text-gray-300 border border-zincborder font-bold rounded-xl text-xs whitespace-nowrap">
-                <i class="fa-solid fa-money-bill-transfer text-emerald-400 me-1"></i> <span data-i18n="nav_withdraw">Withdrawal</span>
-            </button>
-        </div>
+            <!-- Payment History is admin-only; not shown in public navigation -->
+</div>
     </nav>
 
     <main class="max-w-7xl mx-auto px-4 py-6">
 
         <!-- 1. BATTLE ROYALE SECTION -->
         <section id="sec-br" class="tab-sec block space-y-6">
-
-            <!-- MATCH CARD #01 (LIVE) -->
-            <div class="bg-zincpanel border border-zincborder rounded-2xl p-5 shadow-lg">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-zincborder pb-4 mb-3">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded border border-emerald-500/30 flex items-center gap-1">● LIVE MATCH</span>
-                            <span class="text-xs text-gray-400 font-bold">MATCH #01</span>
-                        </div>
-                        <h2 id="m1_title" class="font-esports text-2xl font-extrabold text-white mt-1">FREE FIRE SQUAD MATCH #01</h2>
-                        <p class="text-xs text-gray-400 mt-1">
-                            <i class="fa-solid fa-clock text-yellow-400 me-1"></i> Time: <span id="m1_time">08:00 PM</span> | 
-                            <i class="fa-solid fa-map-location text-blue-400 me-1"></i> Map: <span id="m1_map">Bermuda</span>
-                        </p>
-                    </div>
-                    <div class="flex gap-2 sm:gap-3 text-center flex-wrap w-full md:w-auto justify-between md:justify-end">
-                        <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]">
-                            <span class="text-[9px] text-gray-400 uppercase block" data-i18n="lbl_entry">Entry Fee</span>
-                            <span id="m1_entry" class="font-esports text-lg font-bold text-yellow-400">₹25</span>
-                        </div>
-                        <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]">
-                            <span class="text-[9px] text-gray-400 uppercase block" data-i18n="lbl_perkill">Per Kill</span>
-                            <span id="m1_perkill" class="font-esports text-lg font-bold text-sky-400">₹12</span>
-                        </div>
-                        <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]">
-                            <span class="text-[9px] text-gray-400 uppercase block" data-i18n="lbl_prizepool">Prize Pool</span>
-                            <span id="m1_prize" class="font-esports text-lg font-bold text-emerald-400">₹500</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Winner Ranks Prize Breakdown -->
-                <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <span class="text-[11px] font-bold text-gray-400 me-1" data-i18n="lbl_winners">Winners:</span>
-                    <span class="bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-2.5 py-1 rounded-lg text-xs font-bold">🥇 1st: <span id="m1_p1">₹250</span></span>
-                    <span class="bg-gray-400/10 border border-gray-400/30 text-gray-300 px-2.5 py-1 rounded-lg text-xs font-bold">🥈 2nd: <span id="m1_p2">₹150</span></span>
-                    <span class="bg-amber-700/10 border border-amber-600/30 text-amber-400 px-2.5 py-1 rounded-lg text-xs font-bold">🥉 3rd: <span id="m1_p3">₹100</span></span>
-                </div>
-
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs font-bold text-gray-300"><i class="fa-solid fa-th text-yellow-400 me-1"></i> Slots Status</span>
-                    <button onclick="toggleSlotsBox('m1_slots_box')" class="px-4 py-2 bg-yellow-500 text-black font-extrabold text-xs rounded-xl hover:bg-yellow-400 transition flex items-center gap-2">
-                        <span data-i18n="btn_view_slots">View / Book Slots (48)</span> <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                </div>
-
-                <div id="m1_slots_box" class="mt-4 pt-4 border-t border-zincborder/60">
-                    <div class="text-xs text-gray-400 flex gap-3 font-semibold mb-3 justify-end">
-                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> <span data-i18n="lbl_free">Free</span></span>
-                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span> <span data-i18n="lbl_pending">Pending</span></span>
-                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span> <span data-i18n="lbl_booked">Booked</span></span>
-                    </div>
-                    <div id="m1_slotsGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5"></div>
-                </div>
-            </div>
-
-            <!-- MATCH CARD #02 (UPCOMING) -->
-            <div class="bg-zincpanel border border-zincborder rounded-2xl p-5 shadow-lg">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-zincborder pb-4 mb-3">
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="px-2.5 py-0.5 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded border border-yellow-500/30 flex items-center gap-1">⏰ UPCOMING MATCH</span>
-                            <span class="text-xs text-gray-400 font-bold">MATCH #02</span>
-                        </div>
-                        <h2 id="m2_title" class="font-esports text-2xl font-extrabold text-white mt-1">FREE FIRE SQUAD MATCH #02</h2>
-                        <p class="text-xs text-gray-400 mt-1">
-                            <i class="fa-solid fa-clock text-yellow-400 me-1"></i> Time: <span id="m2_time">09:30 PM</span> | 
-                            <i class="fa-solid fa-map-location text-blue-400 me-1"></i> Map: <span id="m2_map">Purgatory</span>
-                        </p>
-                    </div>
-                    <div class="flex gap-2 sm:gap-3 text-center flex-wrap w-full md:w-auto justify-between md:justify-end">
-                        <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]">
-                            <span class="text-[9px] text-gray-400 uppercase block" data-i18n="lbl_entry">Entry Fee</span>
-                            <span id="m2_entry" class="font-esports text-lg font-bold text-yellow-400">₹25</span>
-                        </div>
-                        <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]">
-                            <span class="text-[9px] text-gray-400 uppercase block" data-i18n="lbl_perkill">Per Kill</span>
-                            <span id="m2_perkill" class="font-esports text-lg font-bold text-sky-400">₹12</span>
-                        </div>
-                        <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]">
-                            <span class="text-[9px] text-gray-400 uppercase block" data-i18n="lbl_prizepool">Prize Pool</span>
-                            <span id="m2_prize" class="font-esports text-lg font-bold text-emerald-400">₹500</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Winner Ranks Prize Breakdown -->
-                <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <span class="text-[11px] font-bold text-gray-400 me-1" data-i18n="lbl_winners">Winners:</span>
-                    <span class="bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-2.5 py-1 rounded-lg text-xs font-bold">🥇 1st: <span id="m2_p1">₹250</span></span>
-                    <span class="bg-gray-400/10 border border-gray-400/30 text-gray-300 px-2.5 py-1 rounded-lg text-xs font-bold">🥈 2nd: <span id="m2_p2">₹150</span></span>
-                    <span class="bg-amber-700/10 border border-amber-600/30 text-amber-400 px-2.5 py-1 rounded-lg text-xs font-bold">🥉 3rd: <span id="m2_p3">₹100</span></span>
-                </div>
-
-                <div class="flex justify-between items-center mb-3">
-                    <span class="text-xs font-bold text-gray-300"><i class="fa-solid fa-th text-yellow-400 me-1"></i> Slots Status</span>
-                    <button onclick="toggleSlotsBox('m2_slots_box')" class="px-4 py-2 bg-yellow-500 text-black font-extrabold text-xs rounded-xl hover:bg-yellow-400 transition flex items-center gap-2">
-                        <span data-i18n="btn_view_slots">View / Book Slots (48)</span> <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                </div>
-
-                <div id="m2_slots_box" class="mt-4 pt-4 border-t border-zincborder/60 hidden">
-                    <div class="text-xs text-gray-400 flex gap-3 font-semibold mb-3 justify-end">
-                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> <span data-i18n="lbl_free">Free</span></span>
-                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span> <span data-i18n="lbl_pending">Pending</span></span>
-                        <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span> <span data-i18n="lbl_booked">Booked</span></span>
-                    </div>
-                    <div id="m2_slotsGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5"></div>
-                </div>
-            </div>
-
+            <div id="dynamicMatches" class="space-y-6"></div>
         </section>
 
         <!-- 2. CLASH SQUAD (CS) SECTION -->
         <section id="sec-cs" class="tab-sec hidden">
-            <h3 class="font-esports text-2xl font-bold text-white mb-4"><i class="fa-solid fa-crosshairs text-red-500 me-2"></i>CLASH SQUAD (CS) LOBBIES</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-zincpanel border border-zincborder p-5 rounded-2xl">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-bold bg-red-500/20 text-red-400 px-2.5 py-1 rounded">CS 1v1 SOLO</span>
-                        <span class="text-xs text-emerald-400 font-bold">Winner Prize: ₹90</span>
-                    </div>
-                    <h4 class="font-esports text-2xl font-bold text-white">1v1 Solo Challenge</h4>
-                    <p class="text-xs text-gray-400 my-2">7 Rounds | Limited Ammo: YES</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-zincborder mt-4">
-                        <span class="text-sm font-bold text-yellow-400">Entry Fee: ₹50</span>
-                        <button onclick="openSupportModal()" class="px-5 py-2 bg-yellow-500 text-black font-extrabold text-xs rounded-xl hover:bg-yellow-400 transition">
-                            Contact Support
-                        </button>
-                    </div>
-                </div>
+  <h3 class="font-esports text-2xl font-bold text-white mb-2"><i class="fa-solid fa-crosshairs text-red-500 me-2"></i>CLASH SQUAD (CS) MATCHES</h3>
+  <p class="text-xs text-gray-400 mb-4">Mode પસંદ કરો, Entry Fee સેટ કરો અને UPI payment શરૂ કરો. Payment History માં દરેક CS mode અલગ દેખાશે.</p>
+  <div class="flex flex-wrap gap-2 mb-4" id="csModeButtons"></div>
+  <div id="csMatchCards" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+</section>
 
-                <div class="bg-zincpanel border border-zincborder p-5 rounded-2xl">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-xs font-bold bg-blue-500/20 text-blue-400 px-2.5 py-1 rounded">CS 4v4 SQUAD</span>
-                        <span class="text-xs text-emerald-400 font-bold">Winner Prize: ₹360</span>
-                    </div>
-                    <h4 class="font-esports text-2xl font-bold text-white">4v4 Squad Challenge</h4>
-                    <p class="text-xs text-gray-400 my-2">7 Rounds | Competitive Store</p>
-                    <div class="flex justify-between items-center pt-3 border-t border-zincborder mt-4">
-                        <span class="text-sm font-bold text-yellow-400">Entry Fee: ₹200 / Squad</span>
-                        <button onclick="openSupportModal()" class="px-5 py-2 bg-yellow-500 text-black font-extrabold text-xs rounded-xl hover:bg-yellow-400 transition">
-                            Contact Support
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. WALLET SECTION -->
-        <section id="sec-wallet" class="tab-sec hidden">
+        <!-- PAYMENT HISTORY SECTION -->
+        <section id="sec-history" class="tab-sec hidden">
             <div class="max-w-xl mx-auto bg-zincpanel border border-purple-500/30 rounded-2xl p-6 shadow-xl">
-                <div class="flex justify-between items-center mb-6 border-b border-zincborder pb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 text-xl">
-                            <i class="fa-solid fa-wallet"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-esports text-2xl font-bold text-white">ZINC Wallet</h3>
-                            <p class="text-xs text-gray-400">Your deposit & winnings balance</p>
-                        </div>
-                    </div>
-                    <span class="bg-emerald-500/20 text-emerald-400 text-xs px-3 py-1 rounded-full font-bold border border-emerald-500/30">Active</span>
+                <h3 class="font-esports text-2xl font-bold text-white mb-5"><i class="fa-solid fa-clock-rotate-left text-purple-400 me-2"></i>Payment History</h3>
+                <!-- Payment history (browser demo; not verified gateway records) -->
+                <div class="bg-zincdark p-4 rounded-xl border border-zincborder mb-6">
+                    <div class="flex items-center justify-between mb-3"><h4 class="text-sm font-bold text-white"><i class="fa-solid fa-clock-rotate-left text-purple-400 me-2"></i>Payment History</h4><button onclick="clearDemoPaymentHistory()" class="text-[10px] text-gray-400 underline">Clear demo history</button></div>
+                    <div id="zincPaymentHistory" class="space-y-2"><p class="text-xs text-gray-500">હજુ કોઈ demo payment attempt નથી.</p></div>
+                    <p class="text-[10px] text-yellow-300 mt-3">આ demo history આ browser/device માં જ રહે છે. UPI payment આપમેળે verify થતું નથી; Admin UTR/બેંક રેકોર્ડ ચકાસીને status પસંદ કરે.</p>
+                    <button onclick="switchTab('admin')" class="mt-3 text-xs text-purple-300 underline">Back to Admin</button>
                 </div>
 
-                <!-- Wallet Balance Display -->
-                <div class="bg-zincdark p-6 rounded-2xl border border-purple-500/40 text-center mb-6 shadow-inner">
-                    <p class="text-xs text-gray-400 uppercase tracking-wider font-bold mb-1">Available Balance</p>
-                    <h2 class="font-esports text-4xl sm:text-5xl font-extrabold text-purple-400">₹<span id="secWalletBalance">0.00</span></h2>
-                </div>
-
-                <!-- Quick Action Buttons -->
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <button onclick="openBookingModal()" class="py-3 bg-purple-600 hover:bg-purple-500 text-white font-extrabold text-xs sm:text-sm rounded-xl transition shadow-lg shadow-purple-600/30 flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-plus-circle"></i> Add Money
-                    </button>
-                    <button onclick="switchTab('withdraw')" class="py-3 bg-zincdark hover:bg-zincborder text-gray-200 border border-zincborder font-extrabold text-xs sm:text-sm rounded-xl transition flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-arrow-up-right-from-square text-emerald-400"></i> Withdraw
-                    </button>
-                </div>
-
-                <!-- Wallet Information -->
-                <div class="bg-zincdark p-4 rounded-xl border border-zincborder">
-                    <h4 class="text-xs font-bold text-gray-300 mb-2 flex items-center gap-2">
-                        <i class="fa-solid fa-circle-info text-yellow-400"></i> Wallet Guide:
-                    </h4>
-                    <ul class="text-[11px] text-gray-400 space-y-1.5 list-disc list-inside">
-                        <li>Slot entry fee match book karti vakhte QR code scan kari direct bhari shakay chhe.</li>
-                        <li>Tame jiteli prize amount tamara Wallet ma add thase.</li>
-                        <li>Minimum withdrawal limit ₹50 chhe (GPay / PhonePe / Paytm / UPI).</li>
-                    </ul>
-                </div>
             </div>
         </section>
-
-        <!-- 4. TOURNAMENT PASSES SECTION -->
-        <section id="sec-passes" class="tab-sec hidden">
-            <h3 class="font-esports text-2xl font-bold text-white mb-2"><i class="fa-solid fa-ticket text-yellow-400 me-2"></i>Tournament Pass</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
-                <div class="bg-zincpanel border border-zincborder p-5 rounded-2xl">
-                    <span class="text-[10px] bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 px-2.5 py-1 rounded font-bold uppercase">STARTER</span>
-                    <h4 class="font-esports text-2xl font-bold text-white mt-2">5 Match Pass</h4>
-                    <p class="text-xs text-gray-400 mt-1">₹125 badle maatra ₹100</p>
-                    <button onclick="openSupportModal()" class="w-full mt-5 py-2.5 bg-yellow-500 text-black font-extrabold text-xs rounded-xl hover:bg-yellow-400 transition">
-                        Contact Support
-                    </button>
-                </div>
-                <div class="bg-zincpanel border border-emerald-500/40 p-5 rounded-2xl">
-                    <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2.5 py-1 rounded font-bold uppercase">VIP PASS</span>
-                    <h4 class="font-esports text-2xl font-bold text-white mt-2">Weekly Pass</h4>
-                    <p class="text-xs text-gray-400 mt-1">7 Days Unlimited Matches</p>
-                    <button onclick="openSupportModal()" class="w-full mt-5 py-2.5 bg-emerald-500 text-black font-extrabold text-xs rounded-xl hover:bg-emerald-400 transition">
-                        Contact Support
-                    </button>
-                </div>
-                <div class="bg-zincpanel border border-red-500/40 p-5 rounded-2xl">
-                    <span class="text-[10px] bg-red-500/20 text-red-400 border border-red-500/30 px-2.5 py-1 rounded font-bold uppercase">CS SPECIAL</span>
-                    <h4 class="font-esports text-2xl font-bold text-white mt-2">CS Solo Pass</h4>
-                    <p class="text-xs text-gray-400 mt-1">3 CS 1v1 Matches Pass</p>
-                    <button onclick="openSupportModal()" class="w-full mt-5 py-2.5 bg-red-500 text-white font-extrabold text-xs rounded-xl hover:bg-red-400 transition">
-                        Contact Support
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. LEADERBOARD SECTION -->
-        <section id="sec-leaderboard" class="tab-sec hidden">
-            <div class="bg-zincpanel border border-zincborder rounded-2xl p-5">
-                <h3 class="font-esports text-2xl font-bold text-white mb-4"><i class="fa-solid fa-trophy text-yellow-400 me-2"></i>Live Leaderboard</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs text-gray-300">
-                        <thead class="bg-zincdark text-gray-400 font-mono uppercase">
-                            <tr>
-                                <th class="p-3">Rank</th>
-                                <th class="p-3">Player Name</th>
-                                <th class="p-3">Kills</th>
-                                <th class="p-3">Placement Pts</th>
-                                <th class="p-3">Total Pts</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="border-b border-zincborder/50">
-                                <td class="p-3 font-bold text-yellow-400">#1</td>
-                                <td class="p-3 font-bold text-white">ZINC_KING</td>
-                                <td class="p-3">12</td>
-                                <td class="p-3">12</td>
-                                <td class="p-3 font-mono font-bold text-emerald-400">24</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. WITHDRAWAL SECTION -->
-        <section id="sec-withdraw" class="tab-sec hidden">
-            <div class="max-w-lg mx-auto bg-zincpanel border border-zincborder rounded-2xl p-6">
-                <h3 class="font-esports text-2xl font-bold text-white mb-2"><i class="fa-solid fa-money-bill-transfer text-emerald-400 me-2"></i>Withdraw Winnings</h3>
-                <p class="text-xs text-gray-400 mb-6">Tamari jiteli rakam UPI ID ke Paytm par transfer thase.</p>
-
-                <form onsubmit="submitWithdrawal(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">Free Fire UID *</label>
-                        <input type="text" id="wdUid" required placeholder="Tamaro UID Number" class="w-full bg-zincdark border border-zincborder rounded-xl p-3 text-sm text-white focus:outline-none focus:border-yellow-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">UPI ID (GPay / PhonePe / Paytm) *</label>
-                        <input type="text" id="wdUpi" required placeholder="Ex. yourname@upi" class="w-full bg-zincdark border border-zincborder rounded-xl p-3 text-sm text-white focus:outline-none focus:border-yellow-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-gray-300 mb-1">Amount (₹) *</label>
-                        <input type="number" id="wdAmount" min="50" required placeholder="Minimum ₹50" class="w-full bg-zincdark border border-zincborder rounded-xl p-3 text-sm text-white focus:outline-none focus:border-yellow-500">
-                    </div>
-                    <button type="submit" class="w-full py-3 bg-emerald-500 text-black font-extrabold text-sm rounded-xl hover:bg-emerald-400 transition">
-                        Submit Withdrawal Request
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- 7. ADMIN DASHBOARD SECTION -->
+<!-- 7. ADMIN DASHBOARD SECTION -->
         <section id="sec-admin" class="tab-sec hidden">
             <div class="bg-zincpanel border border-red-500/30 rounded-2xl p-6">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="font-esports text-2xl font-bold text-red-400"><i class="fa-solid fa-user-shield me-2"></i>Admin Panel</h3>
                     <button onclick="lockAdmin()" class="px-3 py-1 bg-red-500/20 text-red-400 border border-red-500/40 rounded-lg text-xs font-bold hover:bg-red-500 hover:text-white transition">Lock Admin</button>
+                    <button onclick="openAdminPaymentHistory()" class="px-3 py-1 bg-purple-500/20 text-purple-300 border border-purple-500/40 rounded-lg text-xs font-bold">Payment History</button>
                 </div>
 
+                <!-- Add match and status/slot controls -->
+                <div class="bg-zincdark border border-emerald-500/30 p-4 rounded-xl mb-4">
+                    <h4 class="font-bold text-sm text-emerald-400 mb-3">➕ નવો Match ઉમેરો</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <input id="newMatchTitle" placeholder="Match Title" class="bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white">
+                        <input id="newMatchTime" type="datetime-local" class="bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white">
+                        <input id="newMatchMap" placeholder="Map Name" value="Bermuda" class="bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white">
+                        <input id="newMatchSlots" type="number" min="1" max="100" value="48" placeholder="Slots" class="bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white">
+                    </div>
+                    <button onclick="addNewMatch()" class="mt-3 px-5 py-2.5 bg-emerald-500 text-black font-bold text-xs rounded-xl">Create Match</button>
+                </div>
+                <div class="bg-zincdark border border-zincborder p-4 rounded-xl mb-4">
+                    <h4 class="font-bold text-sm text-white mb-3">Match Status & Slots</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div><label class="block text-[11px] text-gray-400 mb-1">Scheduled Start</label><input id="adminStartAt" type="datetime-local" class="w-full bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white"></div>
+                        <div><label class="block text-[11px] text-gray-400 mb-1">Slot Count</label><input id="adminSlotCount" type="number" min="1" max="100" value="48" class="w-full bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white"></div>
+                        <div><label class="block text-[11px] text-gray-400 mb-1">Status</label><select id="adminMatchStatus" class="w-full bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white"><option value="upcoming">Upcoming</option><option value="live">Live</option><option value="completed">Completed</option></select></div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <button onclick="setSelectedMatchStatus('live')" class="px-4 py-2 bg-emerald-500 text-black font-bold text-xs rounded-lg">▶ Start Match</button>
+                        <button onclick="setSelectedMatchStatus('completed')" class="px-4 py-2 bg-red-500 text-white font-bold text-xs rounded-lg">■ Finish Match</button>
+                        <button onclick="saveMatchStatusAndSlots()" class="px-4 py-2 bg-yellow-500 text-black font-bold text-xs rounded-lg">Save Status / Slots</button>
+                    </div>
+                </div>
                 <!-- Select Which Match To Edit -->
                 <div class="bg-zincdark border border-yellow-500/40 p-3 rounded-xl mb-4">
                     <label class="block text-xs font-bold text-yellow-400 mb-1">કઈ મેચ કંટ્રોલ કરવી છે? (Select Match):</label>
                     <select id="adminMatchSelector" onchange="onAdminMatchSelectChange()" class="w-full bg-zincpanel border border-zincborder p-2.5 rounded-xl text-xs text-white font-bold focus:outline-none focus:border-yellow-500">
-                        <option value="m1">Match #01 (LIVE)</option>
-                        <option value="m2">Match #02 (UPCOMING)</option>
+                        
                     </select>
                 </div>
                 
+                <button onclick="createNewMatch()" class="w-full mb-4 px-5 py-3 bg-emerald-500 text-black font-extrabold text-sm rounded-xl hover:bg-emerald-400 transition"><i class="fa-solid fa-plus me-2"></i>નવી મેચ બનાવો (Create Match)</button>
+                <button onclick="deleteSelectedMatch()" class="w-full mb-4 px-5 py-3 bg-red-600 text-white font-extrabold text-sm rounded-xl hover:bg-red-500 transition">પસંદ કરેલી મેચ Delete કરો</button>
+
                 <!-- Match Settings Control -->
                 <div class="bg-zincdark border border-zincborder p-4 rounded-xl mb-6">
                     <h4 class="font-bold text-sm text-white mb-3"><i class="fa-solid fa-sliders text-yellow-400 me-2"></i>1. Selected Match Config:</h4>
@@ -450,8 +205,7 @@
                         <i class="fa-solid fa-floppy-disk me-1"></i> Save Selected Match Config
                     </button>
                 </div>
-
-                <!-- Room ID Publisher -->
+<!-- Room ID Publisher -->
                 <div class="bg-zincdark border border-zincborder p-4 rounded-xl mb-6">
                     <h4 class="font-bold text-sm text-white mb-2"><i class="fa-solid fa-key text-yellow-400 me-2"></i>2. Room ID & Password Update:</h4>
                     <div class="flex flex-col sm:flex-row gap-2">
@@ -481,9 +235,17 @@
                 <p class="text-xs text-yellow-400 font-bold mb-2">QR Code scan karo ke UPI ID par payment karo:</p>
                 
                 <div class="flex justify-center mb-3">
-                    <img src="1000234572.png" alt="Payment QR Code" class="w-48 h-48 object-contain bg-white p-2 rounded-xl border border-yellow-500/40 shadow-lg" onerror="this.onerror=null; this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=849095070@axl%26pn=ZINC%20Esports';">
+                    <img id="dynamicPaymentQR" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=upi%3A%2F%2Fpay%3Fpa%3D849095070%40axl%26pn%3DZINC%20Esports" alt="Dynamic UPI Payment QR Code" class="w-48 h-48 object-contain bg-white p-2 rounded-xl border border-yellow-500/40 shadow-lg">
                 </div>
-
+                <p class="text-sm font-extrabold text-emerald-400 mb-2">Match entry amount: ₹<span id="dynamicPaymentAmount">25</span></p>
+                <p class="text-[10px] text-yellow-300 mb-3">રકમ ભરેલી UPI request. App ખુલ્યા પછી payment confirm કરજો. આ demo payment સફળ થયું છે કે નહીં તે verify કરી શકતું નથી.</p>
+                <div class="grid grid-cols-3 gap-2 mb-3">
+                    <button type="button" onclick="launchZincUPI('gpay')" class="rounded-lg border border-blue-500/40 bg-blue-500/10 p-2 text-xs font-bold text-white"><i class="fa-brands fa-google-pay text-lg block text-blue-300"></i>Google Pay</button>
+                    <button type="button" onclick="launchZincUPI('phonepe')" class="rounded-lg border border-purple-500/40 bg-purple-500/10 p-2 text-xs font-bold text-white"><i class="fa-solid fa-mobile-screen-button text-lg block text-purple-300"></i>PhonePe</button>
+                    <button type="button" onclick="launchZincUPI('paytm')" class="rounded-lg border border-cyan-500/40 bg-cyan-500/10 p-2 text-xs font-bold text-white"><i class="fa-solid fa-wallet text-lg block text-cyan-300"></i>Paytm</button>
+                </div>
+                <p class="text-[10px] text-gray-400 mb-3">જો પસંદ કરેલી app ન ખુલે તો સામાન્ય UPI app પસંદ કરવા માટે આ બટન વાપરો.</p>
+                <button type="button" onclick="launchZincUPI('any')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs rounded-lg mb-3"><i class="fa-solid fa-arrow-up-right-from-square me-1"></i> Pay with any UPI app</button>
                 <p class="text-[11px] text-gray-400 mb-1">Athva UPI ID par pay karo:</p>
                 <p class="font-mono text-sm font-bold text-white select-all bg-zincpanel py-1.5 px-3 rounded-lg border border-zincborder inline-block my-1">849095070@axl</p>
                 <p class="text-[10px] text-gray-400 mt-1">Payment karya pachi 12 digit UTR number niche submit karo.</p>
@@ -525,13 +287,11 @@
             
             <div class="mb-3 text-left bg-zincdark p-3.5 rounded-xl border border-zincborder">
                 <p class="text-[11px] text-gray-400 mb-1 flex items-center gap-1.5 font-bold">
-                    <i class="fa-solid fa-envelope text-blue-400"></i> Email Support
+                    <i class="fa-brands fa-instagram text-pink-400"></i> Instagram Official Profile
                 </p>
-                <div class="font-mono text-xs text-emerald-400 font-bold select-all mb-2">
-                    zincthakor@gmail.com
-                </div>
-                <a href="mailto:zincthakor@gmail.com" class="block text-center w-full py-2 bg-blue-500 text-white font-extrabold text-xs rounded-lg hover:bg-blue-400 transition">
-                    Send Direct Email
+                <p class="text-[11px] text-gray-300 mb-2 font-mono">@zinc_tournaments_official</p>
+                <a href="https://www.instagram.com/zinc_tournaments_official?cplk=YW92aGtxaWtnemdu" target="_blank" rel="noopener noreferrer" class="block text-center w-full py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-extrabold text-xs rounded-lg hover:opacity-90 transition">
+                    <i class="fa-brands fa-instagram me-1"></i> Open Instagram Profile
                 </a>
             </div>
 
@@ -604,8 +364,6 @@
                 nav_cs: "CS મોડ (1v1 / 4v4)",
                 nav_wallet: "વોલેટ",
                 nav_passes: "ટૂર્નામેન્ટ પાસ",
-                nav_leaderboard: "લીડરબોર્ડ",
-                nav_withdraw: "વિથડ્રોઅલ",
                 lbl_entry: "એન્ટ્રી ફી",
                 lbl_perkill: "પર કિલ",
                 lbl_prizepool: "પ્રાઈઝ પૂલ",
@@ -623,8 +381,6 @@
                 nav_cs: "CS Mode (1v1 / 4v4)",
                 nav_wallet: "Wallet",
                 nav_passes: "Tournament Pass",
-                nav_leaderboard: "Leaderboard",
-                nav_withdraw: "Withdrawal",
                 lbl_entry: "Entry Fee",
                 lbl_perkill: "Per Kill",
                 lbl_prizepool: "Prize Pool",
@@ -642,8 +398,6 @@
                 nav_cs: "सीएस मोड (1v1 / 4v4)",
                 nav_wallet: "वॉलेट",
                 nav_passes: "टूर्नामेंट पास",
-                nav_leaderboard: "लीडरबोर्ड",
-                nav_withdraw: "विड्रॉल",
                 lbl_entry: "एंट्री फीस",
                 lbl_perkill: "प्रति किल",
                 lbl_prizepool: "प्राइज पूल",
@@ -682,6 +436,7 @@
         try {
             firebase.initializeApp(firebaseConfig);
             db = firebase.database();
+            window.zincDb = db;
             matchesRef = db.ref('zinc_matches');
         } catch (e) {
             console.log("Firebase connection initialized.");
@@ -693,12 +448,12 @@
         // Default Data Structure
         let matchesData = JSON.parse(localStorage.getItem('zinc_multimatches')) || {
             m1: {
-                config: { title: "FREE FIRE SQUAD MATCH #01", time: "08:00 PM", map: "Bermuda", entry: "25", perkill: "12", prize: "500", p1: "250", p2: "150", p3: "100" },
+                config: { title: "FREE FIRE SQUAD MATCH #01", time: "08:00 PM", map: "Bermuda", status: "live", slotsCount: 48, entry: "25", perkill: "12", prize: "500", p1: "250", p2: "150", p3: "100" },
                 room: { id: "", pass: "" },
                 slots: generate48Slots()
             },
             m2: {
-                config: { title: "FREE FIRE SQUAD MATCH #02", time: "09:30 PM", map: "Purgatory", entry: "25", perkill: "12", prize: "500", p1: "250", p2: "150", p3: "100" },
+                config: { title: "FREE FIRE SQUAD MATCH #02", time: "09:30 PM", map: "Purgatory", status: "upcoming", slotsCount: 48, entry: "25", perkill: "12", prize: "500", p1: "250", p2: "150", p3: "100" },
                 room: { id: "", pass: "" },
                 slots: generate48Slots()
             }
@@ -718,6 +473,7 @@
             document.getElementById('langSelect').value = savedLang;
             changeLanguage(savedLang);
 
+            ensureMatchShape();
             renderAllMatchesUI();
 
             if (matchesRef) {
@@ -739,29 +495,67 @@
             if(el) el.classList.toggle('hidden');
         }
 
+        function ensureMatchShape() {
+            if (!matchesData || typeof matchesData !== 'object') matchesData = {};
+            Object.keys(matchesData).forEach(key => {
+                const m = matchesData[key];
+                if (!m.config) m.config = {};
+                if (!m.room) m.room = {id:"", pass:""};
+                if (!m.slots) m.slots = generate48Slots();
+                for (let i=1;i<=48;i++) {
+                    const sk = `slot_${i}`;
+                    if (!m.slots[sk]) m.slots[sk] = {id:i,status:'free',player:null};
+                }
+            });
+        }
+
         function renderAllMatchesUI() {
-            applyMatchConfigUI('m1', matchesData.m1.config);
-            renderSlots('m1_slotsGrid', 'm1', matchesData.m1.slots);
-
-            applyMatchConfigUI('m2', matchesData.m2.config);
-            renderSlots('m2_slotsGrid', 'm2', matchesData.m2.slots);
-
+            ensureMatchShape();
+            const container = document.getElementById('dynamicMatches');
+            if (container) {
+                container.innerHTML = '';
+                Object.keys(matchesData).sort((a,b) => (Number(a.slice(1))||0)-(Number(b.slice(1))||0)).forEach((key, index) => {
+                    const m = matchesData[key], c = m.config || {};
+                    const card = document.createElement('div');
+                    card.className = 'bg-zincpanel border border-zincborder rounded-2xl p-5 shadow-lg';
+                    card.innerHTML = `
+                      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-zincborder pb-4 mb-3">
+                        <div><div class="flex items-center gap-2"><span class="px-2.5 py-0.5 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded border border-yellow-500/30">⏰ MATCH</span><span class="text-xs text-gray-400 font-bold">MATCH #${index+1}</span></div>
+                        <h2 class="font-esports text-2xl font-extrabold text-white mt-1"></h2>
+                        <p class="text-xs text-gray-400 mt-1">Time: <span class="match-time"></span> | Map: <span class="match-map"></span></p></div>
+                        <div class="flex gap-2 sm:gap-3 text-center flex-wrap"><div class="bg-zincdark p-2.5 rounded-xl border border-zincborder"><span class="text-[9px] text-gray-400 uppercase block">Entry Fee</span><span class="font-esports text-lg font-bold text-yellow-400 match-entry"></span></div><div class="bg-zincdark p-2.5 rounded-xl border border-zincborder"><span class="text-[9px] text-gray-400 uppercase block">Per Kill</span><span class="font-esports text-lg font-bold text-sky-400 match-perkill"></span></div><div class="bg-zincdark p-2.5 rounded-xl border border-zincborder"><span class="text-[9px] text-gray-400 uppercase block">Prize Pool</span><span class="font-esports text-lg font-bold text-emerald-400 match-prize"></span></div></div>
+                      </div>
+                      <div class="flex flex-wrap items-center gap-2 mb-4 text-xs font-bold"><span class="text-gray-400">Winners:</span><span class="text-yellow-400">🥇 1st: <span class="p1"></span></span><span class="text-gray-300">🥈 2nd: <span class="p2"></span></span><span class="text-amber-400">🥉 3rd: <span class="p3"></span></span></div>
+                      <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-gray-300">Slots Status</span><button class="px-4 py-2 bg-yellow-500 text-black font-extrabold text-xs rounded-xl" onclick="toggleSlotsBox('slots_${key}')">View / Book Slots (48)</button></div>
+                      <div id="slots_${key}" class="mt-4 pt-4 border-t border-zincborder/60 ${index===0?'':'hidden'}"><div class="text-xs text-gray-400 flex gap-3 font-semibold mb-3 justify-end">🟢 Free　🟡 Pending　🔴 Booked</div><div id="grid_${key}" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5"></div></div>`;
+                    card.querySelector('h2').textContent = c.title || `FREE FIRE MATCH #${index+1}`;
+                    card.querySelector('.match-time').textContent = c.time || '';
+                    card.querySelector('.match-map').textContent = c.map || '';
+                    card.querySelector('.match-entry').textContent = '₹'+(c.entry ?? '25');
+                    card.querySelector('.match-perkill').textContent = '₹'+(c.perkill ?? '12');
+                    card.querySelector('.match-prize').textContent = '₹'+(c.prize ?? '500');
+                    card.querySelector('.p1').textContent = '₹'+(c.p1 ?? '250');
+                    card.querySelector('.p2').textContent = '₹'+(c.p2 ?? '150');
+                    card.querySelector('.p3').textContent = '₹'+(c.p3 ?? '100');
+                    container.appendChild(card);
+                    renderSlots(`grid_${key}`, key, m.slots);
+                });
+            }
+            const selector = document.getElementById('adminMatchSelector');
+            if (selector) {
+                const old = selector.value;
+                selector.innerHTML = '';
+                Object.keys(matchesData).forEach((key,i) => {
+                    const opt = document.createElement('option'); opt.value=key; opt.textContent=`Match #${i+1} (${key})`; selector.appendChild(opt);
+                });
+                if (matchesData[old]) selector.value=old;
+                else if (selector.options.length) selector.selectedIndex=0;
+            }
             renderAdminPendingList();
             onAdminMatchSelectChange();
         }
 
-        function applyMatchConfigUI(matchKey, cfg) {
-            if(!cfg) return;
-            document.getElementById(`${matchKey}_title`).innerText = cfg.title || '';
-            document.getElementById(`${matchKey}_time`).innerText = cfg.time || '';
-            document.getElementById(`${matchKey}_map`).innerText = cfg.map || '';
-            document.getElementById(`${matchKey}_entry`).innerText = '₹' + (cfg.entry || '25');
-            document.getElementById(`${matchKey}_perkill`).innerText = '₹' + (cfg.perkill || '12');
-            document.getElementById(`${matchKey}_prize`).innerText = '₹' + (cfg.prize || '500');
-            document.getElementById(`${matchKey}_p1`).innerText = '₹' + (cfg.p1 || '250');
-            document.getElementById(`${matchKey}_p2`).innerText = '₹' + (cfg.p2 || '150');
-            document.getElementById(`${matchKey}_p3`).innerText = '₹' + (cfg.p3 || '100');
-        }
+        function applyMatchConfigUI(matchKey, cfg) {}
 
         function renderSlots(gridId, matchKey, slotsData) {
             const grid = document.getElementById(gridId);
@@ -807,7 +601,7 @@
                 document.getElementById('selectedMatchKey').value = matchKey;
                 document.getElementById('selectedSlotId').value = slot.id;
                 document.getElementById('selectedSlotNum').innerText = slot.id;
-                document.getElementById('bookingMatchTag').innerText = matchKey === 'm1' ? 'Match #1' : 'Match #2';
+                document.getElementById('bookingMatchTag').innerText = `Match #${Object.keys(matchesData).indexOf(matchKey)+1}`;
                 openBookingModal();
             } else if (slot.status === 'pending') {
                 alert(`Slot #${slot.id} payment verification is pending.`);
@@ -841,7 +635,10 @@
             localStorage.setItem('zinc_multimatches', JSON.stringify(matchesData));
             renderAllMatchesUI();
             if(matchesRef) {
-                matchesRef.set(matchesData);
+                matchesRef.set(matchesData).then(() => console.log('Firebase sync successful')).catch(err => {
+                    console.error('Firebase sync failed:', err);
+                    alert('Firebase માં save થયું નથી. Firebase Rules/Auth permissions તપાસો. Error: ' + err.message);
+                });
             }
         }
 
@@ -874,8 +671,9 @@
 
         function onAdminMatchSelectChange() {
             const selectedMatch = document.getElementById('adminMatchSelector').value;
-            const cfg = matchesData[selectedMatch].config;
-            const room = matchesData[selectedMatch].room;
+            if (!selectedMatch || !matchesData[selectedMatch]) return;
+            const cfg = matchesData[selectedMatch].config || {};
+            const room = matchesData[selectedMatch].room || {id:'',pass:''};
 
             document.getElementById('adminMatchTitle').value = cfg.title || '';
             document.getElementById('adminMatchTime').value = cfg.time || '';
@@ -928,7 +726,7 @@
             list.innerHTML = '';
             let count = 0;
 
-            ['m1', 'm2'].forEach(matchKey => {
+            Object.keys(matchesData).forEach(matchKey => {
                 const slotsData = matchesData[matchKey].slots;
                 Object.keys(slotsData).forEach(key => {
                     const slot = slotsData[key];
@@ -938,7 +736,7 @@
                         item.className = 'bg-zincdark border border-zincborder p-3 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs gap-2';
                         item.innerHTML = `
                             <div>
-                                <span class="font-bold text-yellow-400">[${matchKey === 'm1' ? 'Match 1' : 'Match 2'}] Slot #${slot.id}</span> | 
+                                <span class="font-bold text-yellow-400">[Match ${Object.keys(matchesData).indexOf(matchKey)+1}] Slot #${slot.id}</span> | 
                                 <span class="text-white font-bold">${slot.player.ign}</span> (UID: ${slot.player.uid})<br>
                                 <span class="text-gray-300">Mobile: <strong class="text-yellow-400 font-mono">${slot.player.phone || 'N/A'}</strong></span> | 
                                 <span class="text-gray-400">UTR: <strong class="text-emerald-400 font-mono">${slot.player.utr}</strong></span>
@@ -977,7 +775,7 @@
 
             let foundRoom = null;
 
-            ['m1', 'm2'].forEach(matchKey => {
+            Object.keys(matchesData).forEach(matchKey => {
                 const slotsData = matchesData[matchKey].slots;
                 Object.keys(slotsData).forEach(key => {
                     const slot = slotsData[key];
@@ -996,11 +794,28 @@
             }
         }
 
-        // --- 4. UTILITY FUNCTIONS ---
-        function submitWithdrawal(e) {
-            e.preventDefault();
-            alert("Withdrawal request submitted!");
+        function createNewMatch() {
+            if (!isAdminLoggedIn) { alert('પહેલા Admin login કરો.'); return; }
+            const n = Object.keys(matchesData).reduce((max,k)=>Math.max(max,Number(k.slice(1))||0),0)+1;
+            const key = `m${n}`;
+            matchesData[key] = {config:{title:`FREE FIRE MATCH #${String(n).padStart(2,'0')}`,time:'08:00 PM',map:'Bermuda',entry:'25',perkill:'12',prize:'500',p1:'250',p2:'150',p3:'100'},room:{id:'',pass:''},slots:generate48Slots()};
+            saveAndSyncData();
+            const sel=document.getElementById('adminMatchSelector'); if(sel) sel.value=key;
+            onAdminMatchSelectChange();
+            alert('નવી મેચ ઉમેરાઈ. બધા ફોનમાં દેખાવા માટે Firebase sync સફળ હોવું જરૂરી છે.');
         }
+
+        function deleteSelectedMatch() {
+            if (!isAdminLoggedIn) { alert('પહેલા Admin login કરો.'); return; }
+            const key=document.getElementById('adminMatchSelector').value;
+            if (!key) return;
+            if (Object.keys(matchesData).length<=1) { alert('ઓછામાં ઓછી એક મેચ રાખવી જરૂરી છે.'); return; }
+            if (!confirm(`Match ${key} અને તેની booking delete કરવી છે?`)) return;
+            delete matchesData[key];
+            saveAndSyncData();
+        }
+
+        // --- 4. UTILITY FUNCTIONS ---
 
         function switchTab(tab) {
             document.querySelectorAll('.tab-sec').forEach(el => el.classList.add('hidden'));
@@ -1022,5 +837,351 @@
         function closeBookingModal() { document.getElementById('bookingModal').classList.add('hidden'); }
         function closeAdminAuthModal() { document.getElementById('adminAuthModal').classList.add('hidden'); }
     </script>
+
+<script>
+(function(){
+ const oldOnload = window.onload;
+ const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function statusOf(m){
+   const c=m.config||{};
+   if(c.status==='completed') return 'completed';
+   if(c.startAt){
+     const start=new Date(c.startAt).getTime(), now=Date.now();
+     if(Number.isFinite(start)){
+       if(now < start) return 'upcoming';
+       if(now < start + (Number(c.durationMinutes)||60)*60000) return 'live';
+       return 'completed';
+     }
+   }
+   return c.status || 'upcoming';
+ }
+ function slotsCount(m){return Object.keys(m.slots||{}).length || Number(m.config?.slotsCount)||48}
+ function normalize(){
+   Object.keys(matchesData||{}).forEach(k=>{
+     let m=matchesData[k];
+     if(!m.config)m.config={};
+     if(!m.room)m.room={id:'',pass:''};
+     if(!m.slots)m.slots=generate48Slots();
+     if(!m.config.status)m.config.status=(k==='m1'?'live':'upcoming');
+     if(!m.config.slotsCount)m.config.slotsCount=Object.keys(m.slots).length;
+   });
+ }
+ window.onload=function(){
+   if(typeof oldOnload==='function') oldOnload();
+   normalize();
+   renderAllMatchesUI();
+   setInterval(()=>{
+     const before=JSON.stringify(Object.fromEntries(Object.entries(matchesData).map(([k,m])=>[k,m.config.status])));
+     let changed=false;
+     Object.values(matchesData).forEach(m=>{
+       const s=statusOf(m);
+       if(m.config.status!==s && m.config.startAt){m.config.status=s;changed=true;}
+     });
+     if(changed) saveAndSyncData(); else renderMatchCards();
+   },30000);
+ };
+ window.renderAllMatchesUI=function(){
+   normalize(); renderMatchCards(); renderAdminPendingList(); refreshAdminSelector();
+   if(document.getElementById('adminMatchSelector').value) onAdminMatchSelectChange();
+ };
+ window.renderMatchCards=function(){
+   const root=document.getElementById('dynamicMatches'); if(!root)return;
+   root.innerHTML='';
+   Object.entries(matchesData).forEach(([key,m],idx)=>{
+     const c=m.config||{}, st=statusOf(m), slots=m.slots||{}, count=Object.keys(slots).length;
+     const colors={live:'bg-emerald-500/20 text-emerald-400 border-emerald-500/30',upcoming:'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',completed:'bg-red-500/20 text-red-400 border-red-500/30'};
+     const label={live:'● LIVE MATCH',upcoming:'⏰ UPCOMING MATCH',completed:'✓ COMPLETED'};
+     const card=document.createElement('div');
+     card.className='bg-zincpanel border border-zincborder rounded-2xl p-5 shadow-lg';
+     card.innerHTML=`
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-zincborder pb-4 mb-3">
+       <div><div class="flex items-center gap-2 flex-wrap"><span class="px-2.5 py-0.5 ${colors[st]} text-xs font-bold rounded border">${label[st]}</span><span class="text-xs text-gray-400 font-bold">MATCH #${String(idx+1).padStart(2,'0')}</span></div>
+       <h2 class="font-esports text-2xl font-extrabold text-white mt-1">${esc(c.title||'Free Fire Match')}</h2>
+       <p class="text-xs text-gray-400 mt-1"><i class="fa-solid fa-clock text-yellow-400 me-1"></i> Time: ${esc(c.time||'Not set')} | <i class="fa-solid fa-map-location text-blue-400 me-1"></i> Map: ${esc(c.map||'Bermuda')}</p></div>
+       <div class="flex gap-2 sm:gap-3 text-center flex-wrap items-stretch"><div class="bg-indigo-950/60 p-2.5 rounded-xl border border-indigo-500/40 min-w-[150px]"><span class="text-[9px] text-indigo-200 uppercase block">⏳ Match Countdown</span><span id="${key}_countdown" class="font-bold text-sm text-white block mt-1">${c.startAt ? 'Calculating…' : 'Date / time not set'}</span><span id="${key}_matchdate" class="text-[10px] text-gray-300 block mt-1">${c.startAt ? esc(new Date(c.startAt).toLocaleString()) : 'Admin: set match date & time'}</span></div><div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]"><span class="text-[9px] text-gray-400 uppercase block">Entry Fee</span><span class="font-esports text-lg font-bold text-yellow-400">₹${esc(c.entry||'25')}</span></div>
+       <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]"><span class="text-[9px] text-gray-400 uppercase block">Per Kill</span><span class="font-esports text-lg font-bold text-sky-400">₹${esc(c.perkill||'12')}</span></div>
+       <div class="bg-zincdark p-2.5 rounded-xl border border-zincborder min-w-[75px]"><span class="text-[9px] text-gray-400 uppercase block">Prize Pool</span><span class="font-esports text-lg font-bold text-emerald-400">₹${esc(c.prize||'500')}</span></div></div></div>
+      <div class="flex flex-wrap items-center gap-2 mb-4 text-xs font-bold"><span class="text-gray-400">Winners:</span><span class="bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-2.5 py-1 rounded-lg">🥇 1st: ₹${esc(c.p1||'250')}</span><span class="bg-gray-400/10 border border-gray-400/30 text-gray-300 px-2.5 py-1 rounded-lg">🥈 2nd: ₹${esc(c.p2||'150')}</span><span class="bg-amber-700/10 border border-amber-600/30 text-amber-400 px-2.5 py-1 rounded-lg">🥉 3rd: ₹${esc(c.p3||'100')}</span></div>
+      <div class="flex justify-between items-center mb-3"><span class="text-xs font-bold text-gray-300"><i class="fa-solid fa-th text-yellow-400 me-1"></i> Slots: ${count}</span><button onclick="toggleSlotsBox('${key}_dynamic_slots')" class="px-4 py-2 bg-yellow-500 text-black font-extrabold text-xs rounded-xl">View / Book Slots (${count})</button></div>
+      <div id="${key}_dynamic_slots" class="mt-4 pt-4 border-t border-zincborder/60 hidden"><div class="text-xs text-gray-400 flex gap-3 font-semibold mb-3 justify-end"><span>🟢 Free</span><span>🟡 Pending</span><span>🔴 Booked</span></div><div id="${key}_dynamic_grid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5"></div></div>`;
+     root.appendChild(card);
+     renderSlots(key+'_dynamic_grid',key,slots);
+   });
+   if(!Object.keys(matchesData).length)root.innerHTML='<p class="text-gray-400 text-sm">No matches yet.</p>';
+   updateMatchCountdowns();
+ };
+ window.updateMatchCountdowns=function(){
+   Object.entries(matchesData).forEach(([key,m])=>{
+     const el=document.getElementById(key+'_countdown'),dateEl=document.getElementById(key+'_matchdate');if(!el)return;
+     const c=m.config||{}, raw=c.startAt; if(!raw){el.textContent='Date / time not set';if(dateEl)dateEl.textContent='Admin: set match date & time';return;}
+     const target=new Date(raw).getTime();if(!Number.isFinite(target)){el.textContent='Invalid date/time';return;}
+     if(dateEl)dateEl.textContent=new Date(target).toLocaleString(undefined,{year:'numeric',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'});
+     const diff=target-Date.now();if(diff<=0){el.textContent=statusOf(m)==='completed'?'Match completed':statusOf(m)==='live'?'MATCH IS LIVE':'Starting now';return;}
+     const days=Math.floor(diff/86400000),hours=Math.floor((diff%86400000)/3600000),mins=Math.floor((diff%3600000)/60000),secs=Math.floor((diff%60000)/1000);
+     el.textContent=(days?days+'d ':'')+(hours?hours+'h ':'')+(mins?mins+'m ':'')+secs+'s left';
+   });
+ };
+ if(window.zincCountdownTimer)clearInterval(window.zincCountdownTimer);
+ window.zincCountdownTimer=setInterval(()=>{if(typeof matchesData!=='undefined')updateMatchCountdowns();},1000);
+ window.renderSlots=function(gridId,matchKey,slotsData){
+   const grid=document.getElementById(gridId);if(!grid||!slotsData)return;grid.innerHTML='';
+   const dict=i18nData[localStorage.getItem('zinc_lang')||'gu']||i18nData.gu;
+   Object.keys(slotsData).sort((a,b)=>(slotsData[a].id||0)-(slotsData[b].id||0)).forEach(key=>{
+    const slot=slotsData[key],el=document.createElement('div');
+    const cls=slot.status==='pending'?'slot-pending':slot.status==='booked'?'slot-booked':'slot-free';
+    const txt=slot.status==='pending'?dict.lbl_pending:slot.status==='booked'?dict.lbl_booked:dict.lbl_free;
+    el.className=`p-2.5 rounded-xl flex flex-col justify-between cursor-pointer transition select-none ${cls}`;
+    el.innerHTML=`<div class="flex justify-between items-center text-xs font-bold font-mono"><span>#${String(slot.id).padStart(2,'0')}</span><span class="text-[8px] px-1 py-0.5 rounded bg-black/40">${txt}</span></div><div class="text-center py-1.5"><div class="font-bold text-[11px] truncate text-white">${esc(slot.player?.ign||'Empty')}</div></div>`;
+    el.onclick=()=>onSlotClick(matchKey,slot);grid.appendChild(el);
+   });
+ };
+ window.onSlotClick=function(matchKey,slot){
+   const st=statusOf(matchesData[matchKey]);
+   if(st==='completed'){alert('આ મેચ પૂર્ણ થઈ ગઈ છે.');return;}
+   if(slot.status==='free'){
+    document.getElementById('selectedMatchKey').value=matchKey;document.getElementById('selectedSlotId').value=slot.id;
+    document.getElementById('selectedSlotNum').innerText=slot.id;
+    document.getElementById('bookingMatchTag').innerText=matchesData[matchKey].config.title||matchKey;
+    openBookingModal();
+   }else if(slot.status==='pending')alert(`Slot #${slot.id} payment verification is pending.`);
+   else alert(`Slot #${slot.id} is booked by: ${slot.player?.ign||'player'}`);
+ };
+ window.refreshAdminSelector=function(){
+   const sel=document.getElementById('adminMatchSelector');if(!sel)return;
+   const old=sel.value;sel.innerHTML='';
+   Object.entries(matchesData).forEach(([k,m],i)=>{const o=document.createElement('option');o.value=k;o.textContent=`${m.config?.title||k} (${statusOf(m).toUpperCase()})`;sel.appendChild(o)});
+   if(matchesData[old])sel.value=old;else if(sel.options.length)sel.selectedIndex=0;
+ };
+ window.onAdminMatchSelectChange=function(){
+   const sel=document.getElementById('adminMatchSelector'),k=sel?.value,m=matchesData[k];if(!m)return;
+   const c=m.config||{},r=m.room||{};
+   const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v??''};
+   set('adminMatchTitle',c.title);set('adminMatchTime',c.time);set('adminMatchMap',c.map);
+   set('adminEntryFee',c.entry??25);set('adminPerKill',c.perkill??12);set('adminPrizePool',c.prize??500);
+   set('adminP1',c.p1??250);set('adminP2',c.p2??150);set('adminP3',c.p3??100);
+   set('adminRoomId',r.id);set('adminRoomPass',r.pass);
+   set('adminStartAt',c.startAt||'');set('adminSlotCount',Object.keys(m.slots||{}).length);set('adminMatchStatus',statusOf(m));
+ };
+ window.updateSelectedMatchSettings=function(){
+   const k=document.getElementById('adminMatchSelector').value,m=matchesData[k];if(!m)return;
+   const get=id=>document.getElementById(id).value.trim(),c=m.config;
+   Object.assign(c,{title:get('adminMatchTitle'),time:get('adminMatchTime'),map:get('adminMatchMap'),entry:get('adminEntryFee'),perkill:get('adminPerKill'),prize:get('adminPrizePool'),p1:get('adminP1'),p2:get('adminP2'),p3:get('adminP3')});
+   saveAndSyncData();alert('Match settings saved and synced.');
+ };
+ window.addNewMatch=function(){
+   const title=document.getElementById('newMatchTitle').value.trim();if(!title){alert('Match title લખો.');return}
+   const id='m_'+Date.now().toString(36),dt=document.getElementById('newMatchTime').value,map=document.getElementById('newMatchMap').value.trim()||'Bermuda';
+   const n=Math.max(1,Math.min(100,parseInt(document.getElementById('newMatchSlots').value)||48));
+   const slots={};for(let i=1;i<=n;i++)slots['slot_'+i]={id:i,status:'free',player:null};
+   const startAt=dt?new Date(dt).toISOString():'';
+   matchesData[id]={config:{title,time:dt?new Date(dt).toLocaleString():'Not scheduled',map,entry:'25',perkill:'12',prize:'500',p1:'250',p2:'150',p3:'100',status:'upcoming',slotsCount:n,startAt},room:{id:'',pass:''},slots};
+   saveAndSyncData();document.getElementById('adminMatchSelector').value=id;onAdminMatchSelectChange();
+   document.getElementById('newMatchTitle').value='';alert('નવો Match ઉમેરાયો!');
+ };
+ window.setSelectedMatchStatus=function(status){
+   const k=document.getElementById('adminMatchSelector').value;if(!matchesData[k])return;
+   matchesData[k].config.status=status;
+   if(status==='live')matchesData[k].config.startAt=new Date().toISOString();
+   if(status==='completed')matchesData[k].config.startAt='';
+   if(status==='upcoming'&&!matchesData[k].config.startAt)matchesData[k].config.startAt='';
+   document.getElementById('adminMatchStatus').value=status;saveAndSyncData();alert('Match status updated: '+status.toUpperCase());
+ };
+ window.saveMatchStatusAndSlots=function(){
+   const k=document.getElementById('adminMatchSelector').value,m=matchesData[k];if(!m)return;
+   const n=Math.max(1,Math.min(100,parseInt(document.getElementById('adminSlotCount').value)||48));
+   const next={};for(let i=1;i<=n;i++)next['slot_'+i]=m.slots?.['slot_'+i]||{id:i,status:'free',player:null};
+   m.slots=next;m.config.slotsCount=n;m.config.status=document.getElementById('adminMatchStatus').value;
+   const dt=document.getElementById('adminStartAt').value;
+   m.config.startAt=dt?new Date(dt).toISOString():'';
+   if(dt){m.config.time=new Date(dt).toLocaleString();document.getElementById('adminMatchTime').value=m.config.time}
+   saveAndSyncData();alert('Status અને slots સેવ થઈ ગયા.');
+ };
+ window.renderAdminPendingList=function(){
+   const list=document.getElementById('adminPendingList');if(!list)return;list.innerHTML='';let count=0;
+   Object.entries(matchesData).forEach(([k,m])=>Object.values(m.slots||{}).forEach(slot=>{
+    if(slot.status!=='pending'||!slot.player)return;count++;
+    const item=document.createElement('div');item.className='bg-zincdark border border-zincborder p-3 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs gap-2';
+    item.innerHTML=`<div><span class="font-bold text-yellow-400">[${esc(m.config?.title||k)}] Slot #${slot.id}</span> | <span class="text-white font-bold">${esc(slot.player.ign)}</span> (UID: ${esc(slot.player.uid)})<br><span class="text-gray-300">Mobile: <strong class="text-yellow-400">${esc(slot.player.phone||'N/A')}</strong></span> | <span class="text-gray-400">UTR: <strong class="text-emerald-400">${esc(slot.player.utr)}</strong></span></div><div class="flex gap-2"><button onclick="approveSlot('${k}',${slot.id})" class="px-3 py-1 bg-emerald-500 text-black font-bold rounded-lg">Approve</button><button onclick="rejectSlot('${k}',${slot.id})" class="px-3 py-1 bg-red-500 text-white font-bold rounded-lg">Reject</button></div>`;
+    list.appendChild(item);
+   }));
+   if(!count)list.innerHTML='<p class="text-xs text-gray-400">Koi pending booking nathi.</p>';
+ };
+ window.approveSlot=function(k,id){if(matchesData[k]?.slots?.['slot_'+id]){matchesData[k].slots['slot_'+id].status='booked';saveAndSyncData()}};
+ window.rejectSlot=function(k,id){if(matchesData[k]?.slots?.['slot_'+id]){matchesData[k].slots['slot_'+id]={id,status:'free',player:null};saveAndSyncData()}};
+ window.publishRoomDetails=function(){
+   const k=document.getElementById('adminMatchSelector').value,id=document.getElementById('adminRoomId').value.trim(),pass=document.getElementById('adminRoomPass').value.trim();
+   if(!id||!pass){alert('Room ID ane Password banne enter karo.');return}
+   matchesData[k].room={id,pass};saveAndSyncData();alert('Room ID published.');
+ };
+ window.verifyPlayerAndShowRoom=function(){
+   const uid=document.getElementById('checkUidInput').value.trim();
+   if(!uid){alert('Tamaro Free Fire UID number enter karo.');return}
+   const box=document.getElementById('secretRoomBox');
+   box.classList.remove('hidden');
+   const matches=[];
+   Object.entries(matchesData||{}).forEach(([key,m])=>{
+     const hasBooking=Object.values(m.slots||{}).some(slot=>slot.status==='booked' && String(slot.player?.uid||'').trim()===uid);
+     if(hasBooking && m.room?.id && m.room?.pass){
+       matches.push({title:m.config?.title||key,room:m.room});
+     }
+   });
+   if(!matches.length){
+     box.innerHTML='<p class="text-sm text-yellow-300 font-bold">આ UID માટે કોઈ approved booking સાથે Room ID/Password ઉપલબ્ધ નથી.</p>';
+     return;
+   }
+   box.innerHTML='<h4 class="font-bold text-emerald-400 mb-3">તમારી Book કરેલી મેચોના Room Details</h4>'+matches.map(item=>
+     '<div class="rounded-xl border border-emerald-500/30 p-3 mb-3">'+
+     '<p class="text-sm font-extrabold text-white mb-2">🎮 '+esc(item.title)+'</p>'+
+     '<p class="text-xs text-gray-300">Room ID: <strong class="text-yellow-400 font-mono text-sm">'+esc(item.room.id)+'</strong></p>'+
+     '<p class="text-xs text-gray-300 mt-1">Password: <strong class="text-yellow-400 font-mono text-sm">'+esc(item.room.pass)+'</strong></p></div>'
+   ).join('');
+ };
+ window.saveAndSyncData=function(){
+   normalize();Object.keys(matchesData).forEach(k=>{matchesData[k].config.status=statusOf(matchesData[k])});
+   localStorage.setItem('zinc_multimatches',JSON.stringify(matchesData));renderAllMatchesUI();
+   if(matchesRef)matchesRef.set(matchesData).catch(e=>console.error('Firebase sync failed',e));
+ };
+})();
+</script>
+
+<script>
+// ZINC ESPORTS dynamic QR DEMO.
+// Real automatic payment credit requires a payment gateway and verified server webhook.
+(function(){
+  const UPI_ID = '849095070@axl';
+  window.updateDynamicPaymentQR = function(){
+    const key=document.getElementById('selectedMatchKey')?.value;
+    const match=(typeof matchesData !== 'undefined') ? matchesData[key] : undefined;
+    const raw=match?.config?.entry ?? 25;
+    const amount=Math.max(1,Number(String(raw).replace(/[^0-9.]/g,''))||25);
+    const amountEl=document.getElementById('dynamicPaymentAmount');
+    const qr=document.getElementById('dynamicPaymentQR');
+    if(amountEl) amountEl.textContent=amount.toFixed(2).replace(/\.00$/,'');
+    if(qr){
+      const upi='upi://pay?'+new URLSearchParams({pa:UPI_ID,pn:'ZINC Esports',am:amount.toFixed(2),cu:'INR',tn:'ZINC Match '+(match?.config?.title||key||'Entry')}).toString();
+      qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(upi);
+    }
+  };
+  const oldOpen=window.openBookingModal;
+  window.openBookingModal=function(){
+    if(typeof oldOpen==='function') oldOpen();
+    window.updateDynamicPaymentQR();
+  };
+})();
+</script>
+<script>
+// UPI app handoff + local demo history. This cannot verify or auto-credit real payments.
+(function(){
+ const KEY='zinc_demo_payment_history_v1';
+ const UPI_ID='849095070@axl';
+ function getAmount(){const el=document.getElementById('dynamicPaymentAmount');return Math.max(1,Number((el?.textContent||'25').replace(/[^0-9.]/g,''))||25)}
+ function getMatch(){const k=document.getElementById('selectedMatchKey')?.value;return (typeof matchesData!=='undefined' && matchesData[k])?.config?.title || k || 'Match Entry'}
+ function read(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+ function save(items){localStorage.setItem(KEY,JSON.stringify(items));if(window.zincDb)window.zincDb.ref('zinc_payment_history').set(items).catch(e=>console.error('Payment history sync failed',e));render()}
+ window.openAdminPaymentHistory=function(){
+   const admin=document.getElementById('sec-admin');
+   if(!admin || admin.classList.contains('hidden')){alert('પહેલાં Admin PIN થી login કરો.');return;}
+   window.switchTab ? window.switchTab('history') : switchTab('history');
+ };
+ window.setZincPaymentStatus=function(ref,status){
+   const admin=document.getElementById('sec-admin');
+   if(!admin || admin.classList.contains('hidden')){alert('Admin login જરૂરી છે.');return;}
+   const items=read();const item=items.find(x=>x.ref===ref);
+   if(!item)return;
+   item.status=status;item.verifiedAt=Date.now();save(items);
+ };
+ function render(){
+  const root=document.getElementById('zincPaymentHistory');
+  if(!root)return;
+  const items=read();
+  if(!items.length){root.innerHTML='<p class="text-xs text-gray-500">હજુ કોઈ demo payment attempt નથી.</p>';return;}
+  const groups={};
+  items.slice().reverse().forEach(x=>{const key=x.match||'Unknown Match';(groups[key] ||= []).push(x)});
+  root.innerHTML=Object.entries(groups).map(([match,rows])=>`<section class="mb-4 rounded-xl border border-purple-500/30 bg-black/20 p-3"><div class="mb-2 flex items-center justify-between gap-2"><p class="text-sm font-bold text-yellow-300">🎮 ${escapeHtml(match)}</p><span class="text-[10px] text-purple-300">${rows.length} payment record${rows.length===1?'':'s'}</span></div>${rows.map(x=>`<div class="flex justify-between gap-3 border-t border-zincborder/70 py-2"><div><p class="text-xs font-bold text-white">${escapeHtml(x.purpose||'Match Entry Fee Payment')}</p><p class="text-[10px] text-purple-300">${escapeHtml(x.app)}</p><p class="text-[10px] text-gray-400">${new Date(x.time).toLocaleString()}</p><p class="text-[10px] ${x.status==='Verified'?'text-emerald-400':x.status==='Not verified'?'text-red-400':'text-yellow-300'}">Status: ${escapeHtml(x.status||'Not verified')}</p><p class="text-[10px] text-gray-500">Ref: ${escapeHtml(x.ref)}</p><div class="mt-1 flex gap-2"><button onclick="setZincPaymentStatus('${escapeHtml(x.ref)}','Verified')" class="rounded bg-emerald-700/40 px-2 py-1 text-[10px] text-emerald-300">Mark Verified</button><button onclick="setZincPaymentStatus('${escapeHtml(x.ref)}','Not verified')" class="rounded bg-red-700/40 px-2 py-1 text-[10px] text-red-300">Not verified</button></div></div><p class="text-sm font-bold text-yellow-300 whitespace-nowrap">₹${Number(x.amount).toFixed(2)}</p></div>`).join('')}</section>`).join('');
+ }
+ function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+ window.launchZincUPI=function(app){const amount=getAmount();const match=getMatch();const ref='ZINC'+Date.now().toString().slice(-9);const params=new URLSearchParams({pa:UPI_ID,pn:'ZINC Esports',am:amount.toFixed(2),cu:'INR',tn:'ZINC '+match, tr:ref});const upi='upi://pay?'+params.toString();let url=upi;
+ // Android may route these schemes to the chosen app; availability varies by device/app version.
+ if(app==='gpay') url='gpay://upi/pay?'+params.toString();
+ if(app==='phonepe') url='phonepe://pay?'+params.toString();
+ if(app==='paytm') url='paytmmp://pay?'+params.toString();
+ const items=read();items.push({amount,match,purpose:'Tournament / Match Entry Fee Payment',app:({gpay:'Google Pay',phonepe:'PhonePe',paytm:'Paytm',any:'UPI App'})[app]||'UPI App',status:'Not verified',ref,time:Date.now()});save(items.slice(-100));
+ if(app!=='any') { try{window.location.href=url; setTimeout(()=>{if(document.visibilityState==='visible' && !confirm('પસંદ કરેલી app ન ખુલે તો સામાન્ય UPI app chooser ખોલવો છે?'))return;window.location.href=upi;},900);}catch(e){window.location.href=upi;} } else {window.location.href=upi;}
+ };
+ window.clearDemoPaymentHistory=function(){if(confirm('આ device ની demo payment history સાફ કરવી છે?')){localStorage.removeItem(KEY);render()}};
+ window.renderZincPaymentHistory=render;document.addEventListener('zinc-payment-history-updated',render);document.addEventListener('DOMContentLoaded',render);render();
+})();
+</script>
+
+<script>
+(function(){
+ const modes=['1v1','2v2','3v3','4v4','6v6'];
+ const key='zinc_cs_entry_fees_v1';
+ const histKey='zinc_demo_payment_history_v1';
+ const feesDefault={'1v1':50,'2v2':100,'3v3':150,'4v4':200,'6v6':300};
+ function fees(){try{return {...feesDefault,...JSON.parse(localStorage.getItem(key)||'{}')}}catch(e){return {...feesDefault}}}
+ let selected='1v1';
+ function esc(x){return String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+ function render(){
+  const btns=document.getElementById('csModeButtons'), cards=document.getElementById('csMatchCards'); if(!btns||!cards)return;
+  const f=fees();
+  btns.innerHTML=modes.map(m=>`<button onclick="selectCSMode('${m}')" class="px-4 py-2 rounded-lg border text-xs font-bold ${selected===m?'bg-red-500 text-white border-red-400':'bg-zincdark text-gray-300 border-zincborder'}">${m}</button>`).join('');
+  cards.innerHTML=modes.filter(m=>m===selected).map(m=>`<div class="bg-zincpanel border border-zincborder p-5 rounded-2xl">
+   <div class="flex items-center justify-between"><span class="text-xs font-bold bg-red-500/20 text-red-300 px-3 py-1 rounded">CS ${m}</span><span class="text-xs text-gray-400">Entry Fee</span></div>
+   <h4 class="font-esports text-2xl text-white font-bold mt-3">Clash Squad ${m}</h4>
+   <p class="text-xs text-gray-400 mt-2">આ મેચનું પેમેન્ટ Payment History માં “CS ${m}” તરીકે અલગ નોંધાશે.</p>
+   <label class="block text-xs text-gray-300 mt-4 mb-1">Entry Fee (₹)</label>
+   <input id="csFee_${m}" type="number" min="1" value="${Number(f[m])||1}" class="w-full bg-zincdark border border-zincborder rounded-lg p-3 text-white" />
+   <div class="flex flex-wrap gap-2 mt-4"><button onclick="saveCSFee('${m}')" class="px-4 py-2 rounded-lg bg-zincdark border border-zincborder text-white text-xs font-bold">Save Fee</button>
+   <button onclick="payCS('${m}')" class="px-4 py-2 rounded-lg bg-yellow-400 text-black text-xs font-extrabold">Pay with UPI</button></div>
+   </div>`).join('');
+ }
+ window.selectCSMode=function(m){selected=m;render()};
+ window.saveCSFee=function(m){const el=document.getElementById('csFee_'+m), v=Number(el?.value);if(!v||v<1){alert('યોગ્ય Entry Fee નાખો');return}const f=fees();f[m]=v;localStorage.setItem(key,JSON.stringify(f));if(window.zincDb)window.zincDb.ref('zinc_cs_entry_fees').set(f).catch(e=>console.error('CS fee sync failed',e));render();alert('CS '+m+' Entry Fee સેવ થઈ ગઈ.')};
+ window.payCS=function(m){
+  const v=Number(document.getElementById('csFee_'+m)?.value);if(!v||v<1){alert('યોગ્ય Entry Fee નાખો');return}
+  const ref='CS-'+m+'-'+Date.now();
+  let rows=[];try{rows=JSON.parse(localStorage.getItem(histKey)||'[]')}catch(e){}
+  rows.push({ref,match:'CS '+m+' Entry Fee',type:'CS Payment',amount:v,app:'UPI',status:'Pending / Not verified',createdAt:Date.now(),note:'Payment initiated from CS mode'});
+  localStorage.setItem(histKey,JSON.stringify(rows));if(window.zincDb)window.zincDb.ref('zinc_payment_history').set(rows).catch(e=>console.error('CS payment sync failed',e));
+  const upi='upi://pay?pa=849095070@axl&pn='+encodeURIComponent('ZINC ESPORTS')+'&am='+encodeURIComponent(v.toFixed(2))+'&cu=INR&tn='+encodeURIComponent('ZINC ESPORTS CS '+m+' Entry Fee '+ref);
+  window.location.href=upi;
+  alert('CS '+m+' payment attempt Payment History માં નોંધ્યો છે. પેમેન્ટ સફળ થયું છે તેની પુષ્ટિ હજી નથી; Admin UTR/બેંકમાં ચકાસે.');
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render);else render();
+})();
+</script>
+
+<script>
+// ZINC ESPORTS cross-device sync for payment history and CS entry fees.
+(function(){
+  function initExtraSync(){
+    if(!window.zincDb) return;
+    const paymentRef=window.zincDb.ref('zinc_payment_history');
+    const feeRef=window.zincDb.ref('zinc_cs_entry_fees');
+    paymentRef.on('value',snap=>{
+      const data=snap.val();
+      if(Array.isArray(data)){localStorage.setItem('zinc_demo_payment_history_v1',JSON.stringify(data));}
+      else if(data && typeof data==='object'){localStorage.setItem('zinc_demo_payment_history_v1',JSON.stringify(Object.values(data)));}
+      document.dispatchEvent(new Event('zinc-payment-history-updated'));
+    },err=>console.error('Payment history listener failed:',err));
+    feeRef.on('value',snap=>{
+      const data=snap.val();
+      if(data && typeof data==='object'){localStorage.setItem('zinc_cs_entry_fees_v1',JSON.stringify(data));}
+      document.dispatchEvent(new Event('zinc-cs-fees-updated'));
+    },err=>console.error('CS fees listener failed:',err));
+    window.zincDb.ref('.info/connected').on('value',snap=>{
+      const connected=!!snap.val();
+      let badge=document.getElementById('zincRealtimeStatus');
+      if(!badge){badge=document.createElement('div');badge.id='zincRealtimeStatus';badge.style.cssText='position:fixed;bottom:10px;right:10px;z-index:9999;padding:6px 10px;border-radius:999px;font:600 11px Inter,sans-serif;box-shadow:0 2px 10px #0008';document.body.appendChild(badge);}
+      badge.textContent=connected?'● Firebase Live':'● Firebase Offline';
+      badge.style.background=connected?'#064e3b':'#7f1d1d';badge.style.color='#fff';
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initExtraSync);else initExtraSync();
+  document.addEventListener('zinc-payment-history-updated',()=>{if(typeof window.renderZincPaymentHistory==='function')window.renderZincPaymentHistory();});
+})();
+</script>
+
 </body>
 </html>
